@@ -1,6 +1,11 @@
 # Use the official Rust runtime as a parent image
 FROM rust:1.86.0-slim-bookworm
 
+
+RUN cargo build
+
+RUN cargo run
+
 # # 1. Install system dependencies
 # RUN apt-get update && \
 #     apt-get install -y \
