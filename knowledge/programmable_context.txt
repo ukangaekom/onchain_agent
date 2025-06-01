@@ -93,7 +93,7 @@ KNOWLEDGE_BASE:
 
     'Community/Marketing':'Used for growth, partnerships, and adoption efforts.',
 
-    'website':https://chain.link/',
+    'website':'https://rexaai.org/',
 
     'roadmap':'A four-phase journey from foundation to domination, shaping the future of AI-driven crypto trading.',
 
