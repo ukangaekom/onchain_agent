@@ -1,14 +1,14 @@
 # Use the official Rust runtime as a parent image
 FROM rust:1.86.0-slim-bookworm
 
-# 1. Install system dependencies
-RUN apt-get update && \
-    apt-get install -y \
-    pkg-config \
-    libssl-dev \
-    openssl \
-    ca-certificates \
-    && rm -rf /var/lib/apt/lists/*
+# # 1. Install system dependencies
+# RUN apt-get update && \
+#     apt-get install -y \
+#     pkg-config \
+#     libssl-dev \
+#     openssl \
+#     ca-certificates \
+#     && rm -rf /var/lib/apt/lists/*
 
 # 2. Create app directory
 # WORKDIR /app
@@ -25,4 +25,4 @@ RUN apt-get update && \
 # EXPOSE 8081
 
 # 6. Run the application
-CMD ["cargo run"]
+# CMD ["cargo run"]
