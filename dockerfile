@@ -11,18 +11,18 @@ RUN apt-get update && \
     && rm -rf /var/lib/apt/lists/*
 
 # 2. Create app directory
-WORKDIR /app
+# WORKDIR /app
 
 # 3. Copy your pre-built binary (from your local target/release)
-COPY target/release/onchain_agent /app/onchain_agent
+# COPY target/release/onchain_agent /app/onchain_agent
 
 # 4. Copy any necessary files (like .env, config files)
-COPY .env /app/
+# COPY .env /app/
 
-# 5. Set environment variables (adjust as needed)
-ENV RUST_LOG=info
-ENV PORT=8080
-EXPOSE 8080
+# # 5. Set environment variables (adjust as needed)
+# ENV RUST_LOG=info
+# ENV PORT=8081
+# EXPOSE 8081
 
 # 6. Run the application
-CMD ["/app/onchain_agent"]
+CMD ["cargo run"]
