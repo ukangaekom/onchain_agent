@@ -3,7 +3,7 @@ mod tools;
 
 // use customer_agent::customer_process;
 use agent_process::{process};
-use tools::{get_price, parse_input, extract_output};
+use tools::{get_price, get_marketcap, parse_input, extract_output};
 
 use frankenstein::GetUpdatesParams;
 use frankenstein::ReplyParameters;
@@ -43,6 +43,7 @@ fn main() {
 
                         if let Some(text) = message.text.clone(){
                             println!("Text:{}",text);
+                            // println!(" from {}", message.from.unwrap().username.unwrap());
 
                             let routing_response = process(&text);
 
@@ -57,7 +58,22 @@ fn main() {
 
                                         println!("The valid command has been triggered{}, {}!",&command, &coin);
                                         
-                                        agent_response = format!("The price of {} is ${}",&coin,get_price(&coin));
+                                        agent_response = get_price(&coin);
+                                        // agent_response = format!("Price of {:?} is {:?}", &coin, get_price(&prices)["USD"]);
+                                        // agent_response = format!("{}",&prices);
+                                        println!("{:?}", &command);
+                                    }
+
+                                },
+
+
+                                output if output.clone().expect("REASON").contains("get_market_cap") => {
+
+                                    if let Some((command, coin)) = parse_input(&output.unwrap()){
+
+                                        println!("The valid command has been triggered{}, {}!",&command, &coin);
+                                        
+                                        agent_response = format!("The marketcap of {} is {}",&coin,get_marketcap(&coin));
                                         // agent_response = format!("Price of {:?} is {:?}", &coin, get_price(&prices)["USD"]);
                                         // agent_response = format!("{}",&prices);
                                         println!("{:?}", &command);

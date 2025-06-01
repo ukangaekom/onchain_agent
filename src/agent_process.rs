@@ -1,13 +1,9 @@
 
-use crate::trade_agent::trade_process;
-use crate::customer_agent::customer_process;
-use crate::tools::{get_price, parse_input};
-
 use genai::chat::printer::print_chat_stream;
 use genai::chat::{ChatMessage, ChatRequest};
 use genai::Client;
 
-const PROCESS_SYSTEM_CONFIGURATION : &str = include_str!("../public/mcp_agent.txt");
+const PROCESS_SYSTEM_CONFIGURATION : &str = include_str!("../knowledge/programmable_context.txt");
 
 
 #[tokio::main]
@@ -24,18 +20,24 @@ pub async fn process(_text:&str) -> Option<std::string::String> {
 
     let chat_res = client.exec_chat_stream(model, chat_req, None).await.ok();
     
-    let routing_response = print_chat_stream(chat_res.expect("REASON"),  None).await.ok();
+    let routing_response = match print_chat_stream(chat_res.expect("REASON"),  None).await {
+
+        Ok(response) => {
+            return Some(response);
+        },
+
+        Err(_) => {
+            return Some("Error Processing".to_string());
+        }
+    };
 
     
-
-    return routing_response;
-
 }
 
 
 
 
 
-// Option<std::string::String>
+
 
 
